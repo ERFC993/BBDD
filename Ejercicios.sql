@@ -230,7 +230,7 @@
 	libro.
 */
     select		type 				as 	'Categoria',
-				avg(round(price))	as	'Precio Promedio'
+				round(avg(price),2)	as	'Precio Promedio'
     from		titles
     group by	type;
     
@@ -243,28 +243,53 @@
     select		type				as 	'Categoria',
 				avg(round(price))	as	'Precio promedio'
     from 		titles
-    where		type like 	'_%'
+    where		type <> ''
     group by	type;
     
 /*
 	Ejercicio 26
     Listar los locales que hayan vendido más de 100 libros.
 */
-    select		stor_id		as	'Local',
-				sum(qty)	as 	'Total Vendido'	  			 
+    select		stor_id		as	Negocio,
+				sum(qty)	as 	Cantidad	  			 
     from		sales
-    group by	stor_id;
+    group by	stor_id
+    having 		Cantidad>100;
     
     
 /*
 	Ejercicio 27
-    Listar la cantidad de ejemplares vendidos de cada libro en cadatienda. 
+    Listar la cantidad de ejemplares vendidos de cada libro en cada tienda. 
     Poner apodos a las columnas.
 */
     
+	select	title_id Titulo,
+			stor_id	 Tienda,
+            sum(qty) Vendido
+	from	sales
+    group by Titulo, Tienda;
     
+/*
+	Ejercicio 28
+    Listar el valor promedio de los libros agrupados por tipo de libro
+	cuyo promedio esté entre 12 y 14. Poner alias a los encabezados.
+	Ordenar la consulta por promedio.
+*/
+    select	type Tipo,
+			round(avg(price),2) ValorPromedio
+    from 	titles
+    group by Tipo
+    having 	ValorPromedio between 12 and 14
+    order by ValorPromedio;
     
-    
+/*
+	Ejercicio 29
+    Listar las categorías de libros junto con el precio del libro más
+	caro, el más barato y la cantidad de libros existentes para esa
+	categoría. Mostrar solo aquellas categorías de libros cuyo precio de
+	los libros económicos sea inferior a $10 Y cuya cantidad de libros
+	pertenecientes sean mayor a 2.
+*/
     
     
     
