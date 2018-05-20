@@ -291,6 +291,20 @@
 	pertenecientes sean mayor a 2.
 */
     
+    select	type Categoria,
+			max(price) PrecioCaro,
+            min(price) PrecioBarato,
+            count(title_id) Cantidad
+	from	titles
+    group by Categoria
+    having 	PrecioBarato<10 and Cantidad>2;
+    
+/*
+	Ejercicio 30.
+	Contar la cantidad de empleados que trabajen en la compañía.
+*/
+    select	count(emp_id) CantidadEmpleado
+    from	employee;
     
     
     
