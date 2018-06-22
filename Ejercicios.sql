@@ -306,33 +306,77 @@
     select	count(emp_id) CantidadEmpleado
     from	employee;
     
+/*
+	Ejericicio 31.
+    Seleccionar todos los libros junto a todos los datos de la editorial la
+	cual lo publicó. 
     
+*/
+    select		t.title libro
+				,e.*
+	from 		publishers e
+    right join	titles t on e.pub_id = t.pub_id;
     
+/*
+	Ejercicio 37.
+	Mostrar el nombre de los libros que nunca fueron vendidos. 
+*/    
+    select 		t.title libro
+				,s.*
+	from 		sales s
+    right join 	titles t on s.title_id = t.title_id
+    where 		s.stor_id is null;
     
+/*
+	Ejercicio 38.
+    Mostrar el nombre y apellido de los empleados y la descripción del
+	trabajo que realiza. Basar la relación en el nivel de trabajo. 
+*/    
+    select 		concat(e.fname,e.lname) empleado,
+				j.job_desc descripcion
+	from 		employee e
+    inner join 	jobs j on j.job_id = e.job_id
+    where		e.job_lvl between j.min_lvl and j.max_lvl;
+/*
+	Ejercicio 39.
+    Mostrar el producto cartesiano entre los libros de negocio (business) y
+	las tiendas ubicadas en California (CA).
+	Mostrar el nombre de la tienda y el nombre del libro. Ordenar por
+	nombre de tienda. 
+*/
+	select 		title libro,
+				type categoria,
+				stor_name tienda,
+				state 		estado
+	from 		titles
+    cross join 	stores
+    where 		type like '%bus%' and state = 'ca'
+    order by 	stor_name;
+
+/*
+	Ejercicio 40.
+    Listar todas las ciudades mencionadas en la base de datos.
+*/
+    select	city	from 	stores
+    union
+    select	city	from 	publishers
+    union 
+    select	city	from 	authors;
     
+/*
+	En la forma simplificada deben estar todos los campos(estar completos) 
+    en el mismo orden en el cual se encuentran en la tabla
+*/
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+/*
+	Ejercicio 41.
+*/
+
+
+
+/*
+	Estructura delete
+    delete from "tabla" where "condicion";
+*/
+
+
